@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Strata — Ceramic Pour-Over Dripper</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --espresso:#2B2420;
+    --cream:#F5EDE4;
+    --rust:#C97A4A;
+    --sage:#8B9D83;
+    --sand:#D4C4A8;
+    --line: rgba(245,237,228,0.16);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--espresso);
+    color:var(--cream);
+    font-family:'Inter',sans-serif;
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--rust);color:var(--espresso);}
+  a{color:inherit;}
+
+  .wrap{max-width:1180px;margin:0 auto;padding:0 32px;}
+
+  /* NAV */
+  nav{
+    position:fixed;top:0;left:0;right:0;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:22px 32px;
+    z-index:50;
+    mix-blend-mode:difference;
+  }
+  .logo{font-family:'Fraunces',serif;font-size:20px;font-weight:600;letter-spacing:0.02em;}
+  .nav-links{display:flex;gap:28px;font-size:13px;letter-spacing:0.06em;text-transform:uppercase;}
+  .nav-links a{text-decoration:none;opacity:0.8;transition:opacity .2s;}
+  .nav-links a:hover{opacity:1;}
+
+  /* HERO */
+  .hero{
+    min-height:100svh;
+    display:flex;align-items:center;
+    position:relative;
+    padding-top:90px;
+    border-bottom:1px solid var(--line);
+  }
+  .hero-grid{
+    display:grid;grid-template-columns:1.1fr 0.9fr;gap:64px;align-items:center;width:100%;
+  }
+  .eyebrow{
+    font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:var(--sand);
+    display:flex;align-items:center;gap:10px;margin-bottom:22px;
+  }
+  .eyebrow::before{content:"";width:22px;height:1px;background:var(--rust);}
+  h1{
+    font-family:'Fraunces',serif;font-weight:500;
+    font-size:clamp(44px,6.2vw,84px);
+    line-height:0.98;
+    letter-spacing:-0.01em;
+  }
+  h1 em{font-style:italic;font-weight:300;color:var(--rust);}
+  .hero-sub{
+    margin-top:26px;font-size:17px;line-height:1.6;color:var(--sand);max-width:440px;
+  }
+  .hero-cta{margin-top:38px;display:flex;align-items:center;gap:22px;}
+  .btn{
+    font-family:'Inter',sans-serif;font-weight:600;font-size:14px;letter-spacing:0.03em;
+    background:var(--rust);color:var(--espresso);
+    border:none;padding:16px 30px;border-radius:2px;
+    cursor:pointer;transition:transform .25s ease, background .25s ease;
+  }
+  .btn:hover{transform:translateY(-2px);background:#dd8c5a;}
+  .btn:focus-visible{outline:2px solid var(--cream);outline-offset:3px;}
+  .price{font-family:'Space Mono',monospace;font-size:15px;color:var(--cream);}
+  .price s{color:var(--sand);opacity:0.5;margin-right:8px;}
+
+  /* SVG POUR — signature element */
+  .pour-stage{
+    position:relative;height:560px;display:flex;align-items:center;justify-content:center;
+  }
+  .pour-stage svg{width:100%;height:100%;max-width:380px;}
+  #stream{stroke-dasharray:600;stroke-dashoffset:600;animation:pour 2.6s 0.4s ease-out forwards;}
+  #pool{transform-origin:center;animation:fill 1.8s 2.2s ease-out forwards;opacity:0;}
+  @keyframes pour{to{stroke-dashoffset:0;}}
+  @keyframes fill{from{opacity:0;transform:scaleY(0.2);}to{opacity:1;transform:scaleY(1);}}
+  @media (prefers-reduced-motion: reduce){
+    #stream,#pool{animation:none !important;stroke-dashoffset:0;opacity:1;}
+  }
+
+  /* RITUAL / STEPS — order matters, it's a brewing sequence */
+  section{padding:120px 0;border-bottom:1px solid var(--line);}
+  .section-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:64px;flex-wrap:wrap;gap:20px;}
+  h2{font-family:'Fraunces',serif;font-weight:500;font-size:clamp(30px,4vw,46px);}
+  .section-head p{color:var(--sand);max-width:340px;font-size:15px;line-height:1.6;}
+
+  .ritual{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
+  .step{background:var(--espresso);padding:36px 28px;min-height:230px;display:flex;flex-direction:column;justify-content:space-between;}
+  .step-time{font-family:'Space Mono',monospace;font-size:13px;color:var(--rust);}
+  .step h3{font-family:'Fraunces',serif;font-weight:500;font-size:21px;margin:18px 0 10px;}
+  .step p{font-size:14px;color:var(--sand);line-height:1.55;}
+
+  /* DETAIL / SPECS */
+  .detail{display:grid;grid-template-columns:0.9fr 1.1fr;gap:80px;align-items:start;}
+  .detail-copy h2{margin-bottom:22px;}
+  .detail-copy p{color:var(--sand);font-size:16px;line-height:1.75;max-width:460px;}
+  .specs{margin-top:40px;border-top:1px solid var(--line);}
+  .spec-row{display:flex;justify-content:space-between;padding:16px 0;border-bottom:1px solid var(--line);font-size:14px;}
+  .spec-row span:first-child{color:var(--sand);font-family:'Space Mono',monospace;font-size:12px;text-transform:uppercase;letter-spacing:0.06em;}
+
+  .glaze-options{display:flex;flex-direction:column;gap:14px;}
+  .glaze{
+    display:flex;align-items:center;gap:20px;padding:20px;border:1px solid var(--line);
+    cursor:pointer;transition:border-color .2s;
+  }
+  .glaze:hover, .glaze.active{border-color:var(--rust);}
+  .swatch{width:46px;height:46px;border-radius:50%;flex-shrink:0;border:1px solid rgba(255,255,255,0.1);}
+  .glaze h4{font-family:'Fraunces',serif;font-size:18px;font-weight:500;margin-bottom:4px;}
+  .glaze p{font-size:13px;color:var(--sand);}
+
+  /* FOOTER / FINAL CTA */
+  footer{padding:90px 0 50px;}
+  .final-cta{text-align:center;max-width:600px;margin:0 auto 70px;}
+  .final-cta h2{font-size:clamp(32px,5vw,54px);margin-bottom:20px;}
+  .final-cta p{color:var(--sand);margin-bottom:38px;font-size:16px;}
+  .foot-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:36px;border-top:1px solid var(--line);font-size:12px;color:var(--sand);flex-wrap:wrap;gap:14px;}
+
+  @media (max-width:880px){
+    .hero-grid{grid-template-columns:1fr;}
+    .pour-stage{height:340px;order:-1;}
+    .ritual{grid-template-columns:1fr 1fr;}
+    .detail{grid-template-columns:1fr;gap:48px;}
+    .nav-links{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">Strata</div>
+  <div class="nav-links">
+    <a href="#ritual">The Pour</a>
+    <a href="#detail">Details</a>
+    <a href="#buy">Order</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Hand-thrown · single vessel batches</div>
+      <h1>Coffee, <em>layered</em><br>by hand.</h1>
+      <p class="hero-sub">Strata is a stoneware pour-over dripper, ribbed in concentric rings that slow water just enough to pull out the cup's full range — not just the loudest notes.</p>
+      <div class="hero-cta">
+        <button class="btn" id="buyBtn">Add to cart — $68</button>
+        <span class="price"><s>$82</s>Founder's run, 200 made</span>
+      </div>
+    </div>
+
+    <div class="pour-stage" aria-hidden="true">
+      <svg viewBox="0 0 300 420" fill="none">
+        <!-- kettle spout -->
+        <path d="M70 20 C 90 10, 130 10, 150 30" stroke="#D4C4A8" stroke-width="6" stroke-linecap="round"/>
+        <!-- pour stream -->
+        <path id="stream" d="M150 32 C 152 90, 158 140, 162 180" stroke="#C97A4A" stroke-width="4" stroke-linecap="round"/>
+        <!-- dripper body (rings) -->
+        <path d="M100 190 L 210 190 L 185 290 L 125 290 Z" stroke="#F5EDE4" stroke-width="2.5" opacity="0.9"/>
+        <path d="M108 210 L 202 210 L 183 250 L 127 250 Z" stroke="#F5EDE4" stroke-width="1.5" opacity="0.55"/>
+        <path d="M116 230 L 194 230 L 178 270 L 132 270 Z" stroke="#F5EDE4" stroke-width="1.5" opacity="0.4"/>
+        <!-- pool of coffee in carafe -->
+        <rect x="95" y="300" width="120" height="80" rx="3" stroke="#D4C4A8" stroke-width="2"/>
+        <rect id="pool" x="100" y="345" width="110" height="30" fill="#8B5A2B"/>
+      </svg>
+    </div>
+  </div>
+</header>
+
+<section id="ritual">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>A four-minute ritual</h2>
+      <p>The ring geometry is tuned to this sequence — rush it and the ribs do nothing for you.</p>
+    </div>
+    <div class="ritual">
+      <div class="step">
+        <div>
+          <span class="step-time">0:00</span>
+          <h3>Bloom</h3>
+          <p>40g water, just off the boil. The rings hold the grounds level while gas escapes evenly.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div>
+          <span class="step-time">0:45</span>
+          <h3>First pour</h3>
+          <p>Pour to 150g in slow concentric circles, tracing the ribs from center out.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div>
+          <span class="step-time">1:30</span>
+          <h3>Second pour</h3>
+          <p>Top up to 300g. The stepped ridges keep flow steady without a paper filter's drag.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div>
+          <span class="step-time">3:15</span>
+          <h3>Drawdown</h3>
+          <p>Bed drains flat, not cratered — a sign the rings did their job evenly.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="detail">
+  <div class="wrap detail">
+    <div class="detail-copy">
+      <h2>Stoneware,<br>fired twice.</h2>
+      <p>Each piece is thrown on a wheel, left to dry slow, bisque-fired, glazed by hand, then fired again to 1,250°C. No two rings turn out identical — that's the cone, not a flaw.</p>
+
+      <div class="specs">
+        <div class="spec-row"><span>Material</span><span>Stoneware clay, food-safe glaze</span></div>
+        <div class="spec-row"><span>Capacity</span><span>1–4 cups (450ml)</span></div>
+        <div class="spec-row"><span>Filter</span><span>Fits standard size-02 cone filters</span></div>
+        <div class="spec-row"><span>Care</span><span>Hand wash recommended</span></div>
+        <div class="spec-row"><span>Origin</span><span>Thrown in small batches, Oaxaca MX</span></div>
+      </div>
+    </div>
+
+    <div class="glaze-options">
+      <div class="glaze active" data-glaze="Ash Clay">
+        <div class="swatch" style="background:#D4C4A8;"></div>
+        <div><h4>Ash Clay</h4><p>Matte sand glaze, warms with use</p></div>
+      </div>
+      <div class="glaze" data-glaze="Iron Rust">
+        <div class="swatch" style="background:#C97A4A;"></div>
+        <div><h4>Iron Rust</h4><p>Reactive glaze, breaks gold at the ribs</p></div>
+      </div>
+      <div class="glaze" data-glaze="Sage Smoke">
+        <div class="swatch" style="background:#8B9D83;"></div>
+        <div><h4>Sage Smoke</h4><p>Muted green, deepens near the base</p></div>
+      </div>
+      <div class="glaze" data-glaze="Espresso Black">
+        <div class="swatch" style="background:#2B2420;border-color:#8B9D83;"></div>
+        <div><h4>Espresso Black</h4><p>Near-matte, shows least wear over time</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="buy" style="border-bottom:none;">
+  <div class="wrap final-cta">
+    <h2>Pick your glaze, start your pour.</h2>
+    <p id="selectedGlaze">Selected: Ash Clay — $68</p>
+    <button class="btn" id="buyBtn2">Add to cart</button>
+  </div>
+  <div class="wrap foot-bottom">
+    <span>© 2026 Strata Ceramics</span>
+    <span>Made in small batches. Ships in 1–2 weeks.</span>
+  </div>
+</section>
+
+<script>
+  const glazes = document.querySelectorAll('.glaze');
+  const label = document.getElementById('selectedGlaze');
+  glazes.forEach(g => {
+    g.addEventListener('click', () => {
+      glazes.forEach(o => o.classList.remove('active'));
+      g.classList.add('active');
+      label.textContent = `Selected: ${g.dataset.glaze} — $68`;
+    });
+  });
+
+  function addToCart(btn){
+    const original = btn.textContent;
+    btn.textContent = 'Added ✓';
+    btn.style.background = '#8B9D83';
+    setTimeout(() => {
+      btn.textContent = original;
+      btn.style.background = '';
+    }, 1600);
+  }
+  document.getElementById('buyBtn').addEventListener('click', e => addToCart(e.target));
+  document.getElementById('buyBtn2').addEventListener('click', e => addToCart(e.target));
+</script>
+
+</body>
+</html>
